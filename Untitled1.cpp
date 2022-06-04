@@ -225,16 +225,10 @@ int sumPrice(node *head)
     }
     return sum;
 }
+
 int main()
 {
     node *head = NULL;
-    // init(head);
-    // cout << "----" << endl;
-    // display(head);
-    // cout << "Chieu cao lon nhat: " << findMaxHeight(head) << endl;
-    // eraseAll(head, 3);
-    // display(head);
-    // int choice;
     while (1)
     {
         cout << "\n-----------------Menu------------------\n";
@@ -246,6 +240,7 @@ int main()
         cout << "\n6. insertAt\n";
         cout << "\n7. findMaxPrice\n";
         cout << "\n8. sumPrice\n";
+        cout << "\n9. Exit\n";
         cout << "\n--------------------------------------\n";
         cout << "\nEnter your choice:\t";
         int choice;
@@ -287,6 +282,9 @@ int main()
         case 8:
             cout << "Tong gia: " << sumPrice(head) << endl;
             break;
+        case 9:
+        	cout<<"Exiting..."<<endl;
+            exit(1);
         default:
             cout << "\nWrong choice!\n";
             break;
