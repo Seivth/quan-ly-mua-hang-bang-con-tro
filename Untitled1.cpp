@@ -8,6 +8,7 @@ struct node
     int price;
     int total;
     string name;
+    //pointer
     node *next;
 };
 
@@ -18,8 +19,8 @@ node *CreateNode()
     tmp = new node;
     tmp->next = NULL;
     cout << "Nhap ten: ";
-    fflush(stdin);
-    getline(cin, tmp->name);
+    fflush(stdin);//nhap du lieu tu ban phim
+    getline(cin, tmp->name);//nhan thong tin tu ban phim qua ham sau do truyen vao bien chi dinh
     cout << "Nhap so luong: ";
     cin >> tmp->sl;
     cout << "Nhap gia tien: ";
@@ -45,25 +46,6 @@ void insertTail(node *&head)
     p->next = tmp;
 }
 
-// chen node sap xep theo ten
-void insertSort(node *&head)
-{
-    node *tmp = CreateNode();
-    node *p = head, *before;
-    while (p != NULL && tmp->name > p->name)
-    {
-        before = p;
-        p = p->next;
-    }
-    if (p == head)
-    {
-        tmp->next = p;
-        head = tmp;
-        return;
-    }
-    before->next = tmp;
-    tmp->next = p;
-}
 // chen node tai vi tri pos
 void insertAt(node *&head, int pos)
 {
@@ -122,11 +104,11 @@ void eraseAt(node *&head, int pos)
 // tim kiem node dau tien trong danh sach co chua ten=name
 // tra ve con tro den node do
 // tra ve NULL neu khong tim thay
-node *find(node *head, string name)
+node find(node *&head, int pos)
 {
     int idx = 1; // danh sach bat dau tai vi tri 1
     node *p = head;
-    while (p != NULL && p->name != name)
+    while (p != NULL && idx != pos)
     {
         p = p->next;
         idx++;
@@ -142,26 +124,8 @@ node *find(node *head, string name)
     {
         cout << "Khong tim thay" << endl;
     }
-    return p;
 }
-// tim kiem tat ca node trong danh sach co chua ten=name
-void findAll(node *head, string name)
-{
-    int idx = 1; // danh sach bat dau tai vi tri 1
-    node *p = head;
-    while (p != NULL)
-    {
-        if (p->name == name)
-        {
-            cout << "Vi tri " << idx << endl;
-            cout << "Ten:" << p->name << endl;
-            cout << "So Luong: " << p->sl << endl;
-            cout << "Gia Tien: " << p->price << endl;
-        }
-        p = p->next;
-        idx++;
-    }
-}
+
 // khoi tao danh sach
 void init(node *&head)
 {
@@ -235,9 +199,9 @@ int main()
         cout << "\n1. init\n";
         cout << "\n2. display\n";
         cout << "\n3. insertTail\n";
-        cout << "\n4. insertSort\n";
+        cout << "\n4. insertAt\n";
         cout << "\n5. eraseAt\n";
-        cout << "\n6. insertAt\n";
+        cout << "\n6. find\n";
         cout << "\n7. findMaxPrice\n";
         cout << "\n8. sumPrice\n";
         cout << "\n9. Exit\n";
@@ -260,8 +224,13 @@ int main()
             insertTail(head);
             break;
         case 4:
-            insertSort(head);
+        {
+            int pos;
+            cout << "Nhap vi tri: ";
+            cin >> pos;
+            insertAt(head, pos);
             break;
+        }
         case 5:
         	int pos;
         	cout << "Nhap vi tri: ";
@@ -273,7 +242,7 @@ int main()
             int pos;
             cout << "Nhap vi tri: ";
             cin >> pos;
-            insertAt(head, pos);
+            find(head, pos);
             break;
         }
         case 7:
